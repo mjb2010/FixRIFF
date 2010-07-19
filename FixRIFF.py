@@ -18,14 +18,6 @@ import os, struct, sys
 # It assumes the presence of a simple 44-byte RIFF header followed by nothing but
 # valid subchunk data (i.e., no metadata tags tacked onto the end!)
 #
-# It was written to solve a problem where some 16-bit, 44.1 kHz PCM-containing
-# WAVs had undercounted ChunkSize and SubChunkSize values.
-# Software reading such WAVs will typically honor the stated values, discarding
-# any incomplete samples if necessary. This is good, because you don't want to
-# treat tags (e.g. ID3 tags) as if they were audio data, but it's bad if the
-# values are wrong and you really do have audio data beyond where the chunks
-# supposedly end.
-#
 
 # make a list of wav files to read
 wavs = filter(lambda s: s.endswith(".wav") and not s.endswith("-fixed.wav"), os.listdir(os.getcwd()))

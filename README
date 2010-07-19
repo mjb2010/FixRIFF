@@ -1,0 +1,39 @@
+FixRIFF README
+==============
+
+FixRIFF was written to solve a problem where some 16-bit, 44.1 kHz PCM-containing
+WAV files had undercounted ChunkSize and SubChunkSize values.
+
+Software reading such WAVs will typically honor the stated values, discarding
+any data at the end of the file, truncating incomplete samples if necessary.
+Generally this is good, because the software shouldn't treat extra data
+(e.g. ID3 tags) as if they were audio data. However, it's bad if the values are
+simply wrong, and you really do have valid audio data beyond where the chunks
+supposedly end.
+
+All FixRIFF does, at this point, is checks all the WAV files in the current folder,
+not counting any whose names end with "-fixed.wav", to see if the master ChunkSize
+at the beginning of the RIFF header and the data SubChunkSize at the end of the
+header look OK. If either seems to be wrong, they'll be fixed. The fixed version of
+the file is written to a new file with a "-fixed.wav" suffix.
+
+Obviously this could go horribly wrong. It's operating under the assumption that
+the RIFF header is 44 bytes long, and that everything in the file after that is
+valid audio data. So if that's not true, then you're going to screw up your WAVs.
+Make a backup before trusting this program to do what you want!
+
+
+LICENSE
+
+This software is released under the terms of whichever license your project
+requires: The MIT License (see MIT-License.txt), or the GNU Public License
+(Version 3 or any later version; see GPL-License.txt for Version 3).
+
+
+FEEDBACK AND CONTRIBUTING
+
+Comments can be directed to the initial author, Mike J. Brown <mike@skew.org>.
+If you have improved the software and want to contribute back to the source
+code, you can send patches to the author, or let him know your GitHub.com
+username so you can be added as a collaborator, which will give you write access
+to the repository.
