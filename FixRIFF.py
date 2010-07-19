@@ -7,7 +7,7 @@ This software is released under the terms of whichever license your project
 requires: The MIT License (see MIT-License.txt), or the GNU Public License
 (Version 3 or any later version; see GPL-License.txt for Version 3).
 
-Python 3.0 or higher required.
+Python 2.x required.
 """
 __version__ = '2010-07-19'
 
